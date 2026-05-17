@@ -209,79 +209,11 @@ assignment3b/
 
 ⸻
 
-STEP 5 — CREATE MONGODB ATLAS ACCOUNT
+STEP 5- GET CONNECTION STRING FROM MONGODB COMPASS
+1. new connection
+2. copy connection string
 
-Go to:
-
-https://www.mongodb.com/cloud/atlas
-
-Create free account.
-
-⸻
-
-STEP 6 — CREATE CLUSTER
-
-Inside Atlas:
-
-1. Create Project
-2. Build Cluster
-3. Select FREE tier
-4. Choose region
-5. Create cluster
-
-Wait few minutes.
-
-⸻
-
-STEP 7 — CREATE DATABASE USER
-
-Inside:
-
-Database Access
-
-Create:
-
-* username
-* password
-
-⸻
-
-STEP 8 — ALLOW NETWORK ACCESS
-
-Inside:
-
-Network Access
-
-Click:
-
-Add IP Address
-
-Choose:
-
-Allow Access From Anywhere
-
-This adds:
-
-0.0.0.0/0
-
-Important for database connection.
-
-⸻
-
-STEP 9 — GET CONNECTION STRING
-
-Inside Atlas:
-
-1. Click Connect
-2. Select Drivers
-3. Copy connection string
-
-Example:
-
-mongodb+srv://username:password@cluster.mongodb.net/
-⸻
-
-STEP 10 — CREATE EXPRESS SERVER
+STEP 6 — CREATE EXPRESS SERVER
 
 Open:
 
@@ -298,7 +230,7 @@ const PORT = 5050;
 app.use(cors());
 app.use(express.json());
 mongoose.connect(
-    'YOUR_MONGODB_CONNECTION_STRING'
+    'YOUR_MONGODB_CONNECTION_STRING/studentdb'
 )
 .then(() => {
     console.log('MongoDB Connected');
@@ -310,7 +242,6 @@ app.use('/students', studentRoutes);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
 ⸻
 
 IMPORTANT
