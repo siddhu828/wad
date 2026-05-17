@@ -1,0 +1,13 @@
+1. go to credentials manager and go to windows(2nd option) remove git if there is 
+2. make a new repo and then come back to terminal
+3. git config --global user.name "sdas"
+4. git config --global user.email "fdsaffa"
+5. git init
+6. git add .
+7. git commit -m "initial commit"
+8. git remote add origin xyz..
+9. git branch -M main
+10. git push -u origin main
+
+11. sign in pop up
+12. sign karlo
