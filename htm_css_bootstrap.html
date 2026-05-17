@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="html_css_bootstrap.css">
+</head>
+<body>
+
+  <!-- ===== SIDEBAR ===== -->
+  <div id="sidebar">
+    <h4> Admin Panel</h4>
+    <a href="#" class="active">Dashboard</a>
+    <a href="#">Users</a>
+    <a href="#">Products</a>
+    <a href="#">Orders</a>
+    <a href="#">Reports</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div id="main-content">
+    <h3 class="mb-4">Dashboard Overview</h3>
+
+    <!-- Stat Cards Row -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div class="stat-card card-blue">
+          <h6>Total Users</h6>
+          <h2>12,480</h2>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card card-green">
+          <h6>Total Revenue</h6>
+          <h2>₹8,32,000</h2>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card card-orange">
+          <h6>Orders Today</h6>
+          <h2>348</h2>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card card-purple">
+          <h6>Active Exams</h6>
+          <h2>5</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Orders Table -->
+    <div class="bg-white p-4 rounded shadow-sm mb-4">
+      <h5 class="mb-3">Recent Orders</h5>
+      <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#1001</td><td>Riya Shah</td><td>Laptop</td><td>₹55,000</td>
+            <td><span class="badge bg-success">Delivered</span></td>
+          </tr>
+          <tr>
+            <td>#1002</td><td>Arjun Mehta</td><td>Headphones</td><td>₹2,500</td>
+            <td><span class="badge bg-warning text-dark">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#1003</td><td>Priya Joshi</td><td>Mouse</td><td>₹800</td>
+            <td><span class="badge bg-danger">Cancelled</span></td>
+          </tr>
+          <tr>
+            <td>#1004</td><td>Karan Patel</td><td>Keyboard</td><td>₹1,200</td>
+            <td><span class="badge bg-info text-dark">Shipped</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Enrolled Students Table -->
+    <div class="bg-white p-4 rounded shadow-sm">
+      <h5 class="mb-3">Exam Enrollments</h5>
+      <table class="table table-striped">
+        <thead class="table-primary">
+          <tr>
+            <th>Student</th><th>Course</th><th>Exam Date</th><th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Anjali Rao</td><td>WAD</td><td>2026-06-10</td><td>88</td></tr>
+          <tr><td>Rohan Nair</td><td>CN</td><td>2026-06-11</td><td>72</td></tr>
+          <tr><td>Sneha Iyer</td><td>AI</td><td>2026-06-12</td><td>95</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+</html>

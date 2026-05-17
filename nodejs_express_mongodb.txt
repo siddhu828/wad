@@ -1,0 +1,909 @@
+Assignment 3.b — Node.js, Express.js and MongoDB CRUD API Complete Step-by-Step Guide
+
+OBJECTIVE
+
+Create four APIs using:
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+
+for CRUD operations.
+
+CRUD:
+
+* Create
+* Read
+* Update
+* Delete
+
+⸻
+
+WHAT IS AN API?
+
+API stands for:
+
+Application Programming Interface
+
+An API allows:
+
+* frontend
+* backend
+* applications
+
+to communicate with each other.
+
+Example:
+
+Frontend sends request → backend processes request → backend sends response.
+
+⸻
+
+WHAT IS REST API?
+
+REST API is a standard backend architecture using:
+
+Method	Purpose
+GET	Fetch data
+POST	Add data
+PUT	Update data
+DELETE	Remove data
+
+⸻
+
+WHAT IS CRUD?
+
+CRUD	Meaning
+Create	Add data
+Read	Fetch data
+Update	Modify data
+Delete	Remove data
+
+⸻
+
+WHAT IS MONGODB?
+
+MongoDB is a NoSQL database.
+
+It stores data in:
+
+Documents
+
+instead of tables.
+
+MongoDB stores data in JSON-like format.
+
+⸻
+
+WHAT IS MONGOOSE?
+
+Mongoose is a Node.js library used to:
+
+* connect MongoDB
+* create schemas
+* create models
+* interact with database
+
+⸻
+
+#######WHAT WE ARE BUILDING
+
+###Student Management API.
+
+Student fields:
+
+{
+  "name": "Sid",
+  "age": 20,
+  "course": "IT"
+}
+
+⸻
+
+STEP 1 — CREATE PROJECT FOLDER
+
+Create folder:
+
+assignment3b
+
+Open this folder in VS Code.
+
+⸻
+
+STEP 2 — INITIALIZE NODE PROJECT
+
+Open terminal.
+
+Run:
+
+npm init -y
+
+⸻
+
+WHAT THIS DOES
+
+Creates:
+
+package.json
+
+Stores:
+
+* dependencies
+* scripts
+* project information
+
+⸻
+
+STEP 3 — INSTALL REQUIRED PACKAGES
+
+Command:
+
+npm install express mongoose cors nodemon
+
+⸻
+
+EXPLANATION OF EACH PACKAGE
+
+Package	Purpose
+express	Backend framework
+mongoose	MongoDB connection
+cors	Cross-origin requests
+nodemon	Auto restart server
+
+⸻
+
+WHAT IS CORS?
+
+CORS stands for:
+
+Cross-Origin Resource Sharing
+
+Allows frontend and backend running on different ports/domains to communicate.
+
+⸻
+
+WHAT IS NODEMON?
+
+Automatically restarts server whenever code changes.
+
+Without nodemon:
+You must manually restart server every time.
+
+⸻
+
+STEP 4 — CREATE PROJECT FILES
+
+Create:
+
+server.js
+
+Create folders:
+
+models
+routes
+
+Inside models create:
+
+Student.js
+
+Inside routes create:
+
+studentRoutes.js
+
+⸻
+
+PROJECT STRUCTURE
+
+assignment3b/
+ ├── models/
+ │    └── Student.js
+ │
+ ├── routes/
+ │    └── studentRoutes.js
+ │
+ ├── node_modules/
+ ├── package.json
+ ├── package-lock.json
+ ├── server.js
+
+⸻
+
+STEP 5 — CREATE MONGODB ATLAS ACCOUNT
+
+Go to:
+
+https://www.mongodb.com/cloud/atlas
+
+Create free account.
+
+⸻
+
+STEP 6 — CREATE CLUSTER
+
+Inside Atlas:
+
+1. Create Project
+2. Build Cluster
+3. Select FREE tier
+4. Choose region
+5. Create cluster
+
+Wait few minutes.
+
+⸻
+
+STEP 7 — CREATE DATABASE USER
+
+Inside:
+
+Database Access
+
+Create:
+
+* username
+* password
+
+⸻
+
+STEP 8 — ALLOW NETWORK ACCESS
+
+Inside:
+
+Network Access
+
+Click:
+
+Add IP Address
+
+Choose:
+
+Allow Access From Anywhere
+
+This adds:
+
+0.0.0.0/0
+
+Important for database connection.
+
+⸻
+
+STEP 9 — GET CONNECTION STRING
+
+Inside Atlas:
+
+1. Click Connect
+2. Select Drivers
+3. Copy connection string
+
+Example:
+
+mongodb+srv://username:password@cluster.mongodb.net/
+⸻
+
+STEP 10 — CREATE EXPRESS SERVER
+
+Open:
+
+server.js
+
+Write:
+
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const studentRoutes = require('./routes/studentRoutes');
+const app = express();
+const PORT = 5050;
+app.use(cors());
+app.use(express.json());
+mongoose.connect(
+    'YOUR_MONGODB_CONNECTION_STRING'
+)
+.then(() => {
+    console.log('MongoDB Connected');
+})
+.catch((error) => {
+    console.log(error);
+});
+app.use('/students', studentRoutes);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+⸻
+
+IMPORTANT
+
+Replace:
+
+YOUR_MONGODB_CONNECTION_STRING
+⸻
+
+EXPLANATION OF EACH LINE
+
+Import Express
+
+const express = require('express');
+
+Imports Express framework.
+
+⸻
+
+Import Mongoose
+
+const mongoose = require('mongoose');
+
+Used for MongoDB connection.
+
+⸻
+
+Import CORS
+
+const cors = require('cors');
+
+Enables cross-origin requests.
+
+⸻
+
+Import Routes
+
+const studentRoutes = require('./routes/studentRoutes');
+
+Imports student route file.
+
+⸻
+
+Create Express App
+
+const app = express();
+
+Creates backend application.
+
+⸻
+
+Define Port
+
+const PORT = 5050;
+
+Server runs on:
+
+localhost:5050
+
+⸻
+
+Middleware
+
+app.use(cors());
+
+Enables frontend-backend communication.
+
+⸻
+
+app.use(express.json());
+
+Allows server to read JSON request body.
+
+Without this:
+POST requests fail.
+
+⸻
+
+MongoDB Connection
+
+mongoose.connect()
+
+Connects Node.js backend with MongoDB Atlas.
+
+⸻
+
+Mount Routes
+
+app.use('/students', studentRoutes);
+
+All routes begin with:
+
+/students
+
+Example:
+
+/students/add
+
+⸻
+
+Start Server
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
+Starts Express server.
+
+⸻
+
+##STEP 11 — CREATE MONGOOSE MODEL
+
+Open:
+
+models/Student.js
+
+Write:
+
+const mongoose = require('mongoose');
+const studentSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: Number,
+        required: true
+    },
+    course: {
+        type: String,
+        required: true
+    }
+});
+module.exports = mongoose.model(
+    'Student',
+    studentSchema
+);
+
+⸻
+
+WHAT IS A SCHEMA?
+
+Schema defines:
+
+* fields
+* data types
+* validations
+
+⸻
+
+WHAT IS A MODEL?
+
+Model represents MongoDB collection.
+
+Used to:
+
+* create data
+* fetch data
+* update data
+* delete data
+
+⸻
+
+EXPLANATION OF SCHEMA
+
+Field	Type
+name	String
+age	Number
+course	String
+
+⸻
+
+required: true
+
+Field must be provided.
+
+Otherwise validation error occurs.
+
+⸻
+
+STEP 12 — CREATE ROUTES
+
+Open:
+
+routes/studentRoutes.js
+
+Write:
+
+const express = require('express');
+const router = express.Router();
+const Student = require('../models/Student');
+router.post('/add', async (req, res) => {
+    try {
+        const student = new Student(req.body);
+        await student.save();
+        res.status(201).json(student);
+    } catch(error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+router.get('/', async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch(error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+router.put('/update/:id', async (req, res) => {
+    try {
+        const updatedStudent =
+            await Student.findByIdAndUpdate(
+                req.params.id,
+                req.body,
+                { new: true }
+            );
+        res.json(updatedStudent);
+    } catch(error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        await Student.findByIdAndDelete(req.params.id);
+        res.json({
+            message: 'Student Deleted'
+        });
+    } catch(error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+module.exports = router;
+
+⸻
+
+EXPLANATION OF EACH API
+
+CREATE API
+
+router.post('/add')
+
+Adds new student.
+
+Uses:
+
+student.save()
+
+⸻
+
+READ API
+
+router.get('/')
+
+Fetches all students.
+
+Uses:
+
+Student.find()
+
+⸻
+
+UPDATE API
+
+router.put('/update/:id')
+
+Updates student using ID.
+
+Uses:
+
+Student.findByIdAndUpdate()
+
+⸻
+
+DELETE API
+
+router.delete('/delete/:id')
+
+Deletes student.
+
+Uses:
+
+Student.findByIdAndDelete()
+
+⸻
+
+WHAT IS req.body?
+
+Contains request data.
+
+Example:
+
+{
+  "name": "Sid",
+  "age": 20,
+  "course": "IT"
+}
+
+⸻
+
+WHAT IS req.params?
+
+Contains URL parameters.
+
+Example:
+
+/update/12345
+
+12345 becomes:
+
+req.params.id
+
+⸻
+
+WHAT IS async/await?
+
+Used for asynchronous operations.
+
+Database operations take time.
+
+async/await handles them properly.
+
+⸻
+
+WHAT IS try/catch?
+
+Used for error handling.
+
+⸻
+
+STEP 13 — RUN SERVER
+
+Command:
+
+node server.js
+
+OR better:
+
+npx nodemon server.js
+
+⸻
+
+EXPECTED OUTPUT
+
+MongoDB Connected
+Server running on port 5050
+
+⸻
+
+STEP 14 — INSTALL POSTMAN
+
+Download:
+
+https://www.postman.com/downloads/
+
+Postman is used to test APIs.
+
+⸻
+
+STEP 15 — TEST CREATE API
+
+Method:
+
+POST
+
+URL:
+
+http://localhost:5050/students/add
+
+Body → raw → JSON:
+
+{
+  "name": "Sid",
+  "age": 20,
+  "course": "IT"
+}
+
+Click Send.
+
+⸻
+
+EXPECTED RESPONSE
+
+{
+  "_id": "...",
+  "name": "Sid",
+  "age": 20,
+  "course": "IT"
+}
+
+⸻
+
+STEP 16 — TEST READ API
+
+Method:
+
+GET
+
+URL:
+
+http://localhost:5050/students
+
+Returns all students.
+
+⸻
+
+STEP 17 — TEST UPDATE API
+
+Method:
+
+PUT
+
+URL:
+
+http://localhost:5050/students/update/STUDENT_ID
+
+Replace:
+
+STUDENT_ID
+
+with actual MongoDB _id.
+
+Body:
+
+{
+  "name": "Sid Updated",
+  "age": 21,
+  "course": "Computer Engineering"
+}
+
+⸻
+
+STEP 18 — TEST DELETE API
+
+Method:
+
+DELETE
+
+URL:
+
+http://localhost:5050/students/delete/STUDENT_ID
+
+Deletes student.
+
+⸻
+
+COMMON ERRORS
+
+MongoDB Authentication Failed
+
+Reason:
+
+* wrong username/password
+
+Fix:
+
+* check Atlas credentials
+
+⸻
+
+localStorage Error
+
+Not related here.
+
+That belonged to Angular SSR issue.
+
+⸻
+
+403 Forbidden
+
+Usually caused by:
+
+* MongoDB network access issue
+* wrong Atlas permissions
+
+Fix:
+
+Allow:
+
+0.0.0.0/0
+
+inside Network Access.
+
+⸻
+
+Cannot GET /
+
+Occurs because root route not defined.
+
+Optional test route:
+
+app.get('/', (req, res) => {
+    res.send('Server Working');
+});
+
+⸻
+
+IMPORTANT VIVA QUESTIONS
+
+What is Node.js?
+
+Node.js is a JavaScript runtime environment used for backend development.
+
+⸻
+
+What is Express.js?
+
+Express.js is a Node.js framework used for:
+
+* servers
+* routing
+* APIs
+
+⸻
+
+What is MongoDB?
+
+MongoDB is a NoSQL database storing data in JSON-like documents.
+
+⸻
+
+What is Mongoose?
+
+Mongoose is an ODM library used to interact with MongoDB.
+
+⸻
+
+What is CRUD?
+
+CRUD	Meaning
+Create	Add data
+Read	Fetch data
+Update	Modify data
+Delete	Remove data
+
+⸻
+
+What is REST API?
+
+REST API is a backend architecture using HTTP methods.
+
+⸻
+
+Difference Between SQL and MongoDB
+
+SQL	MongoDB
+Tables	Collections
+Rows	Documents
+Structured	Flexible
+
+⸻
+
+What is Middleware?
+
+Functions executed between request and response cycle.
+
+⸻
+
+What is req.body?
+
+Contains incoming request data.
+
+⸻
+
+What is req.params?
+
+Contains URL parameters.
+
+⸻
+
+What is CORS?
+
+Allows frontend-backend communication across different domains/ports.
+
+⸻
+
+FINAL OUTPUT FEATURES
+
+✔ Express Server
+✔ MongoDB Atlas Database
+✔ Mongoose Connection
+✔ Create API
+✔ Read API
+✔ Update API
+✔ Delete API
+✔ REST API Architecture
+✔ JSON Data Handling
+✔ Postman API Testing
+✔ CRUD Operations
