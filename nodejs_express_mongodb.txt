@@ -431,7 +431,7 @@ routes/studentRoutes.js
 Write:
 
 const express = require('express');
-const router = express.Router();
+const router = express.Router();e
 const Student = require('../models/Student');
 router.post('/add', async (req, res) => {
     try {
